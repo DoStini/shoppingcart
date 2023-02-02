@@ -18,13 +18,13 @@ Whenever a "mystery item" is in the cart, it defaults to a Discontinued product
 - Feature envy
   - Formatting the prices using the integers -> solved by implementing toString method on Currency
   - Shopping cart formatting the receipt
+    - Solved by creating a Formatter interface, passed to Shopping Cart using Dependency Injection
+    - Should be instanced according to user's preferences in the system
 
 ## Tests
 
 - The tests are way too focused in the output stream
   - Create a Format interface and use mocks TODO
-
-
 
 # Some changes
 
@@ -40,4 +40,9 @@ Whenever a "mystery item" is in the cart, it defaults to a Discontinued product
 - Create Currency
 - Add a product with reference, name and price
 - Extract pricer to Interface
-- Create Formatter Interface TODO
+- Create Formatter Interface, Dependency Injection
+
+## Total line
+
+In an initial phase, I added a total variable in printReceipt method which was calculated while printing. 
+This doesn't seem like a good idea as this function is doing too much things, such as calculating the price and sending information to print

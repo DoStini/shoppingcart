@@ -1,9 +1,12 @@
 package com.xgen.interview;
 
 import com.xgen.interview.currency.Currency;
+import com.xgen.interview.formatter.Formatter;
+import com.xgen.interview.formatter.FormatterAmountInitial;
 import com.xgen.interview.pricer.IPricer;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -13,9 +16,15 @@ import java.util.*;
 public class ShoppingCart implements IShoppingCart {
     Map<String, Integer> cartItems = new HashMap<>();
     IPricer pricer;
+    private Formatter formatter;
 
     public ShoppingCart(IPricer pricer) {
+        this(pricer, new FormatterAmountInitial());
+    }
+
+    public ShoppingCart(IPricer pricer, Formatter formatter) {
         this.pricer = pricer;
+        this.formatter = formatter;
     }
 
     public void addItem(String reference, int number) {
@@ -43,12 +52,10 @@ public class ShoppingCart implements IShoppingCart {
 
             total = total.add(product.getPrice().times(amount));
 
-            String output = String.format("%dx - %s - %s - %s", amount, reference, product.getName(), product.getPrice().times(amount));
-
-            System.out.println(output);
+            Currency productTotal = product.getPrice().times(amount);
+            this.formatter.addProductLine(product, amount, productTotal);
         }
 
-        String output = String.format("Total: %s", total);
-        System.out.println(output);
+        this.formatter.addTotalLine(total);
     }
 }
