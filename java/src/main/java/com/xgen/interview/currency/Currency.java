@@ -12,6 +12,14 @@ public class Currency {
         return new Currency(value * this.value);
     }
 
+    public Currency add(int value) {
+        return new Currency(value + this.value);
+    }
+
+    public Currency add(Currency currency) {
+        return add(currency.value);
+    }
+
     @Override
     public String toString() {
         return String.format("€%.2f", (float) this.value / 100);

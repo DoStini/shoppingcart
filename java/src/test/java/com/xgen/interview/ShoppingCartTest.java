@@ -21,7 +21,7 @@ public class ShoppingCartTest {
         System.setOut(new PrintStream(myOut));
 
         sc.printReceipt();
-        assertEquals("1x - apple - Apple - €1.00\n", myOut.toString());
+        assertEquals("1x - apple - Apple - €1.00\nTotal: €1.00\n\n", myOut.toString());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class ShoppingCartTest {
         System.setOut(new PrintStream(myOut));
 
         sc.printReceipt();
-        assertEquals("2x - apple - Apple - €2.00\n", myOut.toString());
+        assertEquals("2x - apple - Apple - €2.00\nTotal: €2.00\n\n", myOut.toString());
     }
 
     @Test
@@ -52,9 +52,9 @@ public class ShoppingCartTest {
         String result = myOut.toString();
 
         if (result.startsWith("2x - apple")) {
-            assertEquals("2x - apple - Apple - €2.00\n1x - banana - Banana - €2.00\n", result);
+            assertEquals("2x - apple - Apple - €2.00\n1x - banana - Banana - €2.00\n\nTotal: €4.00\n", result);
         } else {
-            assertEquals("1x - banana - Banana - €2.00\n2x - apple - Apple - €2.00\n", result);
+            assertEquals("1x - banana - Banana - €2.00\n2x - apple - Apple - €2.00\n\nTotal: €4.00\n", result);
         }
     }
 
@@ -68,7 +68,7 @@ public class ShoppingCartTest {
         System.setOut(new PrintStream(myOut));
 
         sc.printReceipt();
-        assertEquals("2x - crisps - DISCONTINUED - €0.00\n", myOut.toString());
+        assertEquals("2x - crisps - DISCONTINUED - €0.00\nTotal: €0.00\n", myOut.toString());
     }
 }
 

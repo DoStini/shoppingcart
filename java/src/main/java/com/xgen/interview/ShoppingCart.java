@@ -31,6 +31,8 @@ public class ShoppingCart implements IShoppingCart {
     public void printReceipt() {
         String[] references = this.cartItems.keySet().toArray(new String[0]);
 
+        Currency total = new Currency(0);
+
         for (String reference: references) {
             Product product = this.pricer.getProduct(reference);
             Integer amount = this.cartItems.get(reference);
@@ -39,9 +41,14 @@ public class ShoppingCart implements IShoppingCart {
                 product = new Product(reference, "DISCONTINUED", new Currency(0));
             }
 
-            String output = amount + "x - " + reference + " - " + product.getName() + " - " + product.getPrice().times(amount);
+            total = total.add(product.getPrice().times(amount));
+
+            String output = String.format("%dx - %s - %s - %s", amount, reference, product.getName(), product.getPrice().times(amount));
 
             System.out.println(output);
         }
+
+        String output = String.format("Total: %s", total);
+        System.out.println(output);
     }
 }

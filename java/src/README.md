@@ -22,7 +22,7 @@ Whenever a "mystery item" is in the cart, it defaults to a Discontinued product
 ## Tests
 
 - The tests are way too focused in the output stream
-  - Create a Format interface and use mocks
+  - Create a Format interface and use mocks TODO
 
 
 
