@@ -9,7 +9,7 @@ import java.util.*;
  * Please write a replacement
  */
 public class ShoppingCart implements IShoppingCart {
-    HashMap<String, Integer> contents = new HashMap<>();
+    Map<String, Integer> contents = new HashMap<>();
     Pricer pricer;
 
     public ShoppingCart(Pricer pricer) {
@@ -28,12 +28,12 @@ public class ShoppingCart implements IShoppingCart {
     public void printReceipt() {
         Object[] keys = contents.keySet().toArray();
 
-        for (int i = 0; i < Array.getLength(keys) ; i++) {
-            Integer price = pricer.getPrice((String)keys[i]) * contents.get(keys[i]);
-            Float priceFloat = new Float(new Float(price) / 100);
+        for (Object key : keys) {
+            int price = pricer.getPrice((String)key) * contents.get(key);
+            Float priceFloat = (float) price / 100;
             String priceString = String.format("€%.2f", priceFloat);
 
-            System.out.println(keys[i] + " - " + contents.get(keys[i]) + " - " + priceString);
+            System.out.println(key + " - " + contents.get(key) + " - " + priceString);
         }
     }
 }
