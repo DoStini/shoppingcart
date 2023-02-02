@@ -1,7 +1,6 @@
 package com.xgen.interview;
 
-import com.xgen.interview.Pricer;
-import com.xgen.interview.ShoppingCart;
+import com.xgen.interview.pricer.Pricer;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -22,7 +21,7 @@ public class ShoppingCartTest {
         System.setOut(new PrintStream(myOut));
 
         sc.printReceipt();
-        assertEquals(String.format("apple - 1 - €1.00%n"), myOut.toString());
+        assertEquals("1x - apple - Apple - €1.00\n", myOut.toString());
     }
 
     @Test
@@ -35,7 +34,7 @@ public class ShoppingCartTest {
         System.setOut(new PrintStream(myOut));
 
         sc.printReceipt();
-        assertEquals(String.format("apple - 2 - €2.00%n"), myOut.toString());
+        assertEquals("2x - apple - Apple - €2.00\n", myOut.toString());
     }
 
     @Test
@@ -52,10 +51,10 @@ public class ShoppingCartTest {
 
         String result = myOut.toString();
 
-        if (result.startsWith("apple")) {
-            assertEquals(String.format("apple - 2 - €2.00%nbanana - 1 - €2.00%n"), result);
+        if (result.startsWith("2x - apple")) {
+            assertEquals("2x - apple - Apple - €2.00\n1x - banana - Banana - €2.00\n", result);
         } else {
-            assertEquals(String.format("banana - 1 - €2.00%napple - 2 - €2.00%n"), result);
+            assertEquals("1x - banana - Banana - €2.00\n2x - apple - Apple - €2.00\n", result);
         }
     }
 
@@ -69,7 +68,7 @@ public class ShoppingCartTest {
         System.setOut(new PrintStream(myOut));
 
         sc.printReceipt();
-        assertEquals(String.format("crisps - 2 - €0.00%n"), myOut.toString());
+        assertEquals("2x - crisps - DISCONTINUED - €0.00\n", myOut.toString());
     }
 }
 

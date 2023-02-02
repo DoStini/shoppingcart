@@ -1,6 +1,8 @@
 package com.xgen.interview;
 
-import java.lang.reflect.Array;
+import com.xgen.interview.currency.Currency;
+import com.xgen.interview.pricer.IPricer;
+
 import java.util.*;
 
 
@@ -9,31 +11,37 @@ import java.util.*;
  * Please write a replacement
  */
 public class ShoppingCart implements IShoppingCart {
-    Map<String, Integer> contents = new HashMap<>();
-    Pricer pricer;
+    Map<String, Integer> cartItems = new HashMap<>();
+    IPricer pricer;
 
-    public ShoppingCart(Pricer pricer) {
+    public ShoppingCart(IPricer pricer) {
         this.pricer = pricer;
     }
 
-    public void addItem(String itemType, int number) {
-        if (!contents.containsKey(itemType)) {
-            contents.put(itemType, number);
+    public void addItem(String reference, int number) {
+        if (!this.cartItems.containsKey(reference)) {
+            this.cartItems.put(reference, number);
         } else {
-            int existing = contents.get(itemType);
-            contents.put(itemType, existing + number);
+            int existing = this.cartItems.get(reference);
+            this.cartItems.put(reference, existing + number);
+            // Need to change this to allow order of insertion
         }
     }
 
     public void printReceipt() {
-        Object[] keys = contents.keySet().toArray();
+        String[] references = this.cartItems.keySet().toArray(new String[0]);
 
-        for (Object key : keys) {
-            int price = pricer.getPrice((String)key) * contents.get(key);
-            Float priceFloat = (float) price / 100;
-            String priceString = String.format("€%.2f", priceFloat);
+        for (String reference: references) {
+            Product product = this.pricer.getProduct(reference);
+            Integer amount = this.cartItems.get(reference);
 
-            System.out.println(key + " - " + contents.get(key) + " - " + priceString);
+            if (product == null) {
+                product = new Product(reference, "DISCONTINUED", new Currency(0));
+            }
+
+            String output = amount + "x - " + reference + " - " + product.getName() + " - " + product.getPrice().times(amount);
+
+            System.out.println(output);
         }
     }
 }
