@@ -51,6 +51,8 @@ Whenever an item is scanned and then scanned again later, the receipt will print
 In an initial phase, I added a total variable in printReceipt method which was calculated while printing. 
 This doesn't seem like a good idea as this function is doing too much things, such as calculating the price and sending information to print
 
+To solve this, the program updates the price as soon as an item is added to the cart. This also allows the user to easily and efficiently view the updated total price after each entry.
+
 ## Scan order
 
 To allow print in the scanning order, I used a LinkedHashMap since it preserves insertion order. 

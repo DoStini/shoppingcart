@@ -1,6 +1,6 @@
 package com.xgen.interview.currency;
 
-// TODO: DIFF CURRENCY CLASSES
+// TODO: DIFFERENT CURRENCY CLASSES (ABSTRACT), PROBABLY A FACTORY PATTERN TO GLOBALLY DEFINE THE PRICE ACCORDING TO STORE SETTINGS
 public class Currency {
     int value;
 
@@ -10,6 +10,11 @@ public class Currency {
 
     public Currency times(int value) {
         return new Currency(value * this.value);
+    }
+
+    // TODO: NEGATIVE EDGE CASES
+    public Currency sub(Currency value) {
+        return new Currency(this.value - value.value);
     }
 
     public Currency add(int value) {
