@@ -29,6 +29,7 @@ Whenever an item is scanned and then scanned again later, the receipt will print
   - Create a Format interface and use mocks TODO
 - Test individually Formatter
 - Use mocks to test if correct print statements called and in the order of scan
+- The tests are now way more well structured and very well adapted to changes
 
 # Some changes
 
@@ -58,3 +59,9 @@ To solve this, the program updates the price as soon as an item is added to the 
 To allow print in the scanning order, I used a LinkedHashMap since it preserves insertion order. 
 
 Also created a `ShoppingCartEntry` to allow the update of a previously added product and to remove the responsability of calculating the total of each entry in the printReceipt.
+
+## Formattings
+
+It is possible to have very customizable formatters, allowing the store to choose how to present each cart entry line and the total line.
+
+It was developed using a Builder Pattern to solve the issue that there could be a lot of possible combinations between body and total price formatter.

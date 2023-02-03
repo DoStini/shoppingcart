@@ -2,12 +2,10 @@ package com.xgen.interview;
 
 import com.xgen.interview.currency.Currency;
 import com.xgen.interview.formatter.Formatter;
-import com.xgen.interview.formatter.FormatterAmountInitial;
+import com.xgen.interview.formatter.SimpleFormatter;
 import com.xgen.interview.pricer.IPricer;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 
 /**
@@ -22,7 +20,8 @@ public class ShoppingCart implements IShoppingCart {
     private Currency total = new Currency(0);
 
     public ShoppingCart(IPricer pricer) {
-        this(pricer, new FormatterAmountInitial());
+
+        this(pricer, new SimpleFormatter());
     }
 
     public ShoppingCart(IPricer pricer, Formatter formatter) {
