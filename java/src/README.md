@@ -65,3 +65,5 @@ Also created a `ShoppingCartEntry` to allow the update of a previously added pro
 It is possible to have very customizable formatters, allowing the store to choose how to present each cart entry line and the total line.
 
 It was developed using a Builder Pattern to solve the issue that there could be a lot of possible combinations between body and total price formatter.
+
+This could be improved even further with another Builder Pattern to customize the Total Formatter.

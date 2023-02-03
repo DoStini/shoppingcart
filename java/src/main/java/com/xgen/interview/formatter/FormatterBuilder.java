@@ -4,7 +4,7 @@ import com.xgen.interview.formatter.body.BodyFormatter;
 import com.xgen.interview.formatter.total.TotalFormatter;
 
 public class FormatterBuilder {
-    Formatter formatter = new Formatter();
+    private Formatter formatter = new Formatter();
 
     void addBodyFormatter(BodyFormatter bodyFormatter) {
         this.formatter.bodyFormatter = bodyFormatter;
