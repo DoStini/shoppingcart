@@ -12,6 +12,8 @@ Whenever a "mystery item" is in the cart, it defaults to a Discontinued product
 
 Whenever an item is scanned and then scanned again later, the receipt will print it in the initial position
 
+Due to lack of time and to be able to focus in more interesting issues, I have left out some simple checks such as negative currency values.
+
 # Code smells / Detected Issues
 
 - Primitive obsession 
