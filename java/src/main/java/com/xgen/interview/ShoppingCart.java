@@ -14,7 +14,7 @@ import java.util.Map;
  * Please write a replacement
  */
 public class ShoppingCart implements IShoppingCart {
-    Map<String, Integer> cartItems = new HashMap<>();
+    protected Map<String, Integer> cartItems = new HashMap<>();
     IPricer pricer;
     private Formatter formatter;
 

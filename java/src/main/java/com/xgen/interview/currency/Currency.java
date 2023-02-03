@@ -24,4 +24,19 @@ public class Currency {
     public String toString() {
         return String.format("€%.2f", (float) this.value / 100);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Currency currency = (Currency) o;
+
+        return value == currency.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value;
+    }
 }

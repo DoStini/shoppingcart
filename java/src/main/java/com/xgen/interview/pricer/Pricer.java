@@ -14,11 +14,6 @@ public class Pricer implements IPricer {
     Map<String, Product> pricingDatabase = new HashMap<>(); // stub
 
     public Pricer() {
-        Product p1 = new Product("apple", "Apple", new Currency(100));
-        Product p2 = new Product("banana", "Banana", new Currency(200));
-
-        this.addProduct(p1);
-        this.addProduct(p2);
     }
 
     @Override

@@ -25,6 +25,8 @@ Whenever a "mystery item" is in the cart, it defaults to a Discontinued product
 
 - The tests are way too focused in the output stream
   - Create a Format interface and use mocks TODO
+- Test individually Formatter
+- Use mocks to test if correct print statements called and in the order of scan
 
 # Some changes
 
@@ -46,3 +48,7 @@ Whenever a "mystery item" is in the cart, it defaults to a Discontinued product
 
 In an initial phase, I added a total variable in printReceipt method which was calculated while printing. 
 This doesn't seem like a good idea as this function is doing too much things, such as calculating the price and sending information to print
+
+## Scan order
+
+To remove some complexity 
