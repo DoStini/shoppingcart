@@ -6,6 +6,7 @@ import com.xgen.interview.formatter.FormatterAmountInitial;
 import com.xgen.interview.pricer.IPricer;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 
@@ -14,9 +15,9 @@ import java.util.Map;
  * Please write a replacement
  */
 public class ShoppingCart implements IShoppingCart {
-    protected Map<String, Integer> cartItems = new HashMap<>();
+    protected LinkedHashMap<String, ShoppingCartEntry> cartItems = new LinkedHashMap<>();
     IPricer pricer;
-    private Formatter formatter;
+    private final Formatter formatter;
 
     public ShoppingCart(IPricer pricer) {
         this(pricer, new FormatterAmountInitial());
@@ -27,13 +28,15 @@ public class ShoppingCart implements IShoppingCart {
         this.formatter = formatter;
     }
 
-    public void addItem(String reference, int number) {
+    public void addItem(String reference, int amount) {
         if (!this.cartItems.containsKey(reference)) {
-            this.cartItems.put(reference, number);
+            Product product = this.pricer.getProduct(reference);
+
+            ShoppingCartEntry cartEntry = new ShoppingCartEntry(product, amount);
+            this.cartItems.put(reference, cartEntry);
         } else {
-            int existing = this.cartItems.get(reference);
-            this.cartItems.put(reference, existing + number);
-            // Need to change this to allow order of insertion
+            ShoppingCartEntry cartEntry = this.cartItems.get(reference);
+            cartEntry.addAmount(amount);
         }
     }
 
@@ -43,17 +46,13 @@ public class ShoppingCart implements IShoppingCart {
         Currency total = new Currency(0);
 
         for (String reference: references) {
-            Product product = this.pricer.getProduct(reference);
-            Integer amount = this.cartItems.get(reference);
-
-            if (product == null) {
-                product = new Product(reference, "DISCONTINUED", new Currency(0));
-            }
+            ShoppingCartEntry cartEntry = this.cartItems.get(reference);
+            Product product = cartEntry.getProduct();
+            Integer amount = cartEntry.getAmount();
 
             total = total.add(product.getPrice().times(amount));
 
-            Currency productTotal = product.getPrice().times(amount);
-            this.formatter.addProductLine(product, amount, productTotal);
+            this.formatter.addProductLine(product, amount, cartEntry.total());
         }
 
         this.formatter.addTotalLine(total);

@@ -10,6 +10,8 @@ For this situation, left some TODO comments for future Shopping Cart developers!
 
 Whenever a "mystery item" is in the cart, it defaults to a Discontinued product
 
+Whenever an item is scanned and then scanned again later, the receipt will print it in the initial position
+
 # Code smells / Detected Issues
 
 - Primitive obsession 
@@ -51,4 +53,6 @@ This doesn't seem like a good idea as this function is doing too much things, su
 
 ## Scan order
 
-To remove some complexity 
+To allow print in the scanning order, I used a LinkedHashMap since it preserves insertion order. 
+
+Also created a `ShoppingCartEntry` to allow the update of a previously added product and to remove the responsability of calculating the total of each entry in the printReceipt.

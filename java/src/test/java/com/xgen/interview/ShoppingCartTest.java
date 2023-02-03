@@ -32,7 +32,7 @@ public class ShoppingCartTest {
 
         sc.addItem("apple", 1);
         assertNotNull(sc.cartItems.get("apple"));
-        assertEquals(1, sc.cartItems.get("apple").intValue());
+        assertEquals(1, sc.cartItems.get("apple").getAmount().intValue());
     }
 
     @Test
@@ -65,7 +65,9 @@ public class ShoppingCartTest {
 
         sc.addItem("apple", 2);
         assertNotNull(sc.cartItems.get("apple"));
-        assertEquals(2, sc.cartItems.get("apple").intValue());
+        assertEquals(2, sc.cartItems.get("apple").getAmount().intValue());
+        assertEquals(p1, sc.cartItems.get("apple").getProduct());
+        assertEquals(p1.getPrice().times(2), sc.cartItems.get("apple").total());
     }
 
     @Test
@@ -100,10 +102,14 @@ public class ShoppingCartTest {
         sc.addItem("banana", 1);
 
         assertNotNull(sc.cartItems.get("apple"));
-        assertEquals(sc.cartItems.get("apple").intValue(), 2);
+        assertEquals(sc.cartItems.get("apple").getAmount().intValue(), 2);
+        assertEquals(p1, sc.cartItems.get("apple").getProduct());
+        assertEquals(p1.getPrice().times(2), sc.cartItems.get("apple").total());
 
         assertNotNull(sc.cartItems.get("banana"));
-        assertEquals(1, sc.cartItems.get("banana").intValue());
+        assertEquals(1, sc.cartItems.get("banana").getAmount().intValue());
+        assertEquals(p2, sc.cartItems.get("banana").getProduct());
+        assertEquals(p2.getPrice().times(1), sc.cartItems.get("banana").total());
     }
 
     @Test
@@ -142,10 +148,14 @@ public class ShoppingCartTest {
         sc.addItem("apple", 4);
 
         assertNotNull(sc.cartItems.get("apple"));
-        assertEquals(6, sc.cartItems.get("apple").intValue());
+        assertEquals(6, sc.cartItems.get("apple").getAmount().intValue());
+        assertEquals(p1, sc.cartItems.get("apple").getProduct());
+        assertEquals(p1.getPrice().times(6), sc.cartItems.get("apple").total());
 
         assertNotNull(sc.cartItems.get("banana"));
-        assertEquals(1, sc.cartItems.get("banana").intValue());
+        assertEquals(1, sc.cartItems.get("banana").getAmount().intValue());
+        assertEquals(p2, sc.cartItems.get("banana").getProduct());
+        assertEquals(p2.getPrice().times(1), sc.cartItems.get("banana").total());
     }
 
     @Test

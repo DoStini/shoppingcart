@@ -28,7 +28,7 @@ public class Pricer implements IPricer {
     @Override
     public Product getProduct(String reference) {
         if (!pricingDatabase.containsKey(reference)) {
-            return null;
+            return new Product(reference, "DISCONTINUED", new Currency(0));
         }
         return pricingDatabase.get(reference);
     }
